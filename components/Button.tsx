@@ -1,16 +1,22 @@
+import { forwardRef } from "react";
 
-type ButtonProps = {
-    
-};
+interface ButtonProps
+    extends React.ButtonHTMLAttributes<HTMLButtonElement> { }
 
-const Button: React.FC<ButtonProps> = ({
-
-}) => {
-    
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
+    className,
+    children,
+    disabled,
+    type = "button",
+    ...props
+}, ref) => {
     return (
-        <div>
-            button
-        </div>
+        <button>
+
+        </button>
     )
-}
+})
+
+Button.displayName = "Button";
+
 export default Button;
