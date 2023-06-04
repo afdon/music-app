@@ -28,6 +28,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "encoding": "^0.1.13",
     "supabase": "^1.64.8"
   }
 }
