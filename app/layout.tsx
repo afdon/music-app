@@ -5,6 +5,7 @@ import { Figtree } from 'next/font/google'
 import { Inter } from 'next/font/google'
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import UserProvider from '@/providers/UserProvider'
+import ModalProvider from '@/providers/ModalProvider'
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 const figtree = Figtree({ subsets: ['latin'] })
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={spaceGrotesk.className}>
         <SupabaseProvider>
           <UserProvider>
+            <ModalProvider />
           <Sidebar>
             {children}
           </Sidebar>
