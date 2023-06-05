@@ -1,16 +1,16 @@
 "use client";
 
-import { Song } from "@/types";
-import { BsPauseFill, BsPlayFill } from "react-icons/bs";
-import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
-import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
-import { useEffect, useState } from "react";
 import useSound from "use-sound";
+import { useEffect, useState } from "react";
+import { BsPauseFill, BsPlayFill } from "react-icons/bs";
+import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 
+import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
 
-import MediaItem from "./MediaItem";
 import LikeButton from "./LikeButton";
+import MediaItem from "./MediaItem";
 import Slider from "./Slider";
 
 
@@ -100,11 +100,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
     return (
         <div className="grid grid-cols-2 md:grid-cols-3 h-full">
-            <div className="
-            flex
-            w-full
-            justify-start
-            ">
+            <div className="flex w-full justify-start">
                 <div className="flex items-center gap-x-4">
                     <MediaItem data={song} />
                     <LikeButton songId={song.id} />
@@ -119,7 +115,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             w-full
             justify-end
             items-center
-            ">
+            "
+            >
                 <div
                     onClick={handlePlay}
                     className="
@@ -153,7 +150,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
                     onClick={onPlayPrevious}
                     size={30}
                     className="
-                        text-neutral-500
+                        text-neutral-400
                         cursor-pointer
                         hover:text-white
                         transition
@@ -179,7 +176,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
                     onClick={onPlayNext}
                     size={30}
                     className="
-                        text-neutral-500
+                        text-neutral-400
                         cursor-pointer
                         hover:text-white
                         transition
@@ -200,7 +197,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
                     />
                 </div>
             </div>
+
         </div>
     );
 }
+
 export default PlayerContent;
