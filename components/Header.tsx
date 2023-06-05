@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 import useAuthModal from "@/hooks/UseAuthModal";
@@ -126,7 +127,20 @@ const Header: React.FC<HeaderProps> = ({
                 gap-x-4
                 ">
                     {user ? (
-                        <div>Logged in</div>
+                        <div className="flex gap-x-4 items-center">
+                            <Button
+                            onClick={handleLogout}
+                            className="bg-white px-6 py-2"
+                            >
+                                Logout
+                            </Button>
+                            <Button
+                            onClick={() => router.push('/account')}
+                            className="bg-white"
+                            >
+                                <FaUserAlt />
+                            </Button>
+                        </div>
                     ) : (
                     <>
                         <div>
