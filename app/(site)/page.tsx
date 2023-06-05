@@ -1,6 +1,9 @@
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 
+//don't cache this page
+export const revalidate = 0;
+
 export default function Home() {
   return (
     <div className='
