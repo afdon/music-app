@@ -14,7 +14,7 @@ import Library from './Library';
 
 interface SidebarProps {
     children: React.ReactNode;
-    song: Song[]
+    songs: Song[]
 };
 
 const Sidebar: React.FC<SidebarProps> = ({
