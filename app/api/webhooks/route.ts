@@ -23,7 +23,7 @@ const relevantEvents = new Set([
 export async function POST(
   request: Request
 ) {
-    const body = await request.text();
+    const body = await request.text()
     const sig = headers().get('Stripe-Signature');
 
     const webhookSecret =
@@ -77,7 +77,7 @@ export async function POST(
       }
     } catch (error) {
       console.log(error);
-      return new NextResponse('Webhook error: "Webhook handler failed! Please view logs."', { status: 400 });
+      return new NextResponse('Webhook error: "Webhook handler failed. View logs."', { status: 400 });
     }
   }
 
