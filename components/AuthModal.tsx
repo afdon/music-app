@@ -4,6 +4,7 @@ import { useSessionContext, useSupabaseClient } from "@supabase/auth-helpers-rea
 import { useRouter } from "next/navigation";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { useEffect } from "react";
 
 import uesAuthModal from "@/hooks/UseAuthModal";
 
@@ -14,6 +15,14 @@ const AuthModal = () => {
     const router = useRouter();
     const { session } = useSessionContext();
     const { onClose, isOpen } = uesAuthModal();
+
+    useEffect(() => {
+        if (session) {
+            router.refresh();
+            onClose();
+        }
+    }, [session, router, onClose])
+    
 
     const onChange = (open: boolean) => {
         if (!open) {
