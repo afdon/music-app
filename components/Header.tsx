@@ -5,10 +5,12 @@ import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 import useAuthModal from "@/hooks/UseAuthModal";
 
 import Button from "./Button";
+import { useUser } from "@/hooks/useUser";
 
 interface HeaderProps {
     children: React.ReactNode;
@@ -21,8 +23,18 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
     const authModal = useAuthModal();
     const router = useRouter();
-    const handleLogout = () => {
-        // Handle Logout in the future
+
+    const supabaseClient = useSupabaseClient();
+    const { user } = useUser();
+
+    const handleLogout = async () => {
+        const { error } = await supabaseClient.auth.signOut();
+        // todo: reset any playing songs
+        router.refresh();
+
+        if (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -113,6 +125,9 @@ const Header: React.FC<HeaderProps> = ({
                 items-center
                 gap-x-4
                 ">
+                    {user ? (
+                        <div>Logged in</div>
+                    ) : (
                     <>
                         <div>
                             <Button
@@ -139,6 +154,7 @@ const Header: React.FC<HeaderProps> = ({
                             </Button>
                         </div>
                     </>
+                    )}
                 </div>
             </div>
             {children}
