@@ -7,6 +7,7 @@ import SupabaseProvider from '@/providers/SupabaseProvider'
 import UserProvider from '@/providers/UserProvider'
 import ModalProvider from '@/providers/ModalProvider'
 import ToasterProvider from '@/providers/ToasterProvider'
+import getSongsByUserId from '@/actions/getSongsByUserId'
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 const figtree = Figtree({ subsets: ['latin'] })
@@ -15,13 +16,16 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Music',
   description: 'Listen',
-}
+};
 
-export default function RootLayout({
+export const revalidate = 0 // don't cache
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const userSongs = await getSongsByUserId();
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
@@ -29,7 +33,7 @@ export default function RootLayout({
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
-          <Sidebar>
+          <Sidebar songs={userSongs}>
             {children}
           </Sidebar>
           </UserProvider>
