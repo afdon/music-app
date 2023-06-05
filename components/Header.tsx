@@ -5,6 +5,9 @@ import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+
+import useAuthModal from "@/hooks/UseAuthModal";
+
 import Button from "./Button";
 
 interface HeaderProps {
@@ -16,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({
     children,
     className,
 }) => {
+    const { onOpen } = useAuthModal();
     const router = useRouter();
     const handleLogout = () => {
         // Handle Logout in the future
