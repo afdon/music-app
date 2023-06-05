@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({
     children,
     className,
 }) => {
-    const { onOpen } = useAuthModal();
+    const authModal = useAuthModal();
     const router = useRouter();
     const handleLogout = () => {
         // Handle Logout in the future
@@ -116,7 +116,7 @@ const Header: React.FC<HeaderProps> = ({
                     <>
                         <div>
                             <Button
-                                onClick={() => { }}
+                                onClick={authModal.onOpen}
                                 className="
                             bg-transparent
                             text-neutral-300
@@ -128,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({
                         </div>
                         <div>
                             <Button
-                                onClick={() => { }}
+                                onClick={authModal.onOpen}
                                 className="
                             bg-white
                             px-6
