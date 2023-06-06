@@ -81,7 +81,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
           if (!product.prices?.length) {
             return (
               <div key={product.id}>
-                No prices available
+                No prices available.
               </div>
             );
           }
@@ -104,7 +104,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
   if (subscription) {
     content = (
       <div className="text-center">
-        Already subscribed.
+        You're already subscribed.
       </div>
     )
   }
