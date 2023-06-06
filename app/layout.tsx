@@ -1,18 +1,19 @@
 import Sidebar from '@/components/Sidebar'
 import './globals.css'
 import { Space_Grotesk } from 'next/font/google'
-import { Figtree } from 'next/font/google'
-import { Inter } from 'next/font/google'
+// import { Figtree } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import UserProvider from '@/providers/UserProvider'
 import ModalProvider from '@/providers/ModalProvider'
 import ToasterProvider from '@/providers/ToasterProvider'
 import getSongsByUserId from '@/actions/getSongsByUserId'
 import Player from '@/components/Player'
+import getActiveProductsWithPrices from '@/actions/getActiveProductsWithPrices'
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
-const figtree = Figtree({ subsets: ['latin'] })
-const inter = Inter({ subsets: ['latin'] })
+// const figtree = Figtree({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Music',
@@ -27,6 +28,8 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const userSongs = await getSongsByUserId();
+  const products = await getActiveProductsWithPrices();
+
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
