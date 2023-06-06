@@ -27,7 +27,7 @@ export default async function Home() {
           text-3xl
           font-semibold
           ">
-            Welcome back
+            Listen
           </h1>
           <div
             className="
@@ -42,7 +42,7 @@ export default async function Home() {
           >
             <ListItem
               image="/images/liked.png"
-              name="Liked Songs"
+              name="Favourite Tracks"
               href="liked"
             />
           </div>
@@ -51,7 +51,7 @@ export default async function Home() {
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
           <h1 className="text-white text-2xl font-semibold">
-            Newest Songs
+            Newest Tracks
           </h1>
         </div>
         <div>
