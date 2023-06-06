@@ -45,12 +45,12 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
     setPriceIdLoading(price.id);
     if (!user) {
       setPriceIdLoading(undefined);
-      return toast.error('Must be logged in!');
+      return toast.error('Please log in!');
     }
 
     if (subscription) {
       setPriceIdLoading(undefined);
-      return toast('Already subscribed!');
+      return toast('You are already subscribed!');
     }
 
     try {
