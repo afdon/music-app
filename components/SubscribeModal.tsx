@@ -104,7 +104,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
   if (subscription) {
     content = (
       <div className="text-center">
-        You're already subscribed.
+        You are already subscribed.
       </div>
     )
   }
