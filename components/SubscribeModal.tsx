@@ -45,12 +45,12 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
     setPriceIdLoading(price.id);
     if (!user) {
       setPriceIdLoading(undefined);
-      return toast.error('Must be logged in');
+      return toast.error('Must be logged in!');
     }
 
     if (subscription) {
       setPriceIdLoading(undefined);
-      return toast('Already subscribed');
+      return toast('Already subscribed!');
     }
 
     try {
@@ -112,7 +112,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
   return (
     <Modal
       title="Only for premium users"
-      description="Listen with a Premium subscription"
+      description="Listen with a premium subscription"
       isOpen={subscribeModal.isOpen}
       onChange={onChange}
     >
