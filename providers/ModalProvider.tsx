@@ -5,8 +5,15 @@ import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import UploadModal from "@/components/UploadModal";
 import SubscribeModal from "@/components/SubscribeModal";
+import { ProductWithPrice } from "@/types";
 
-const ModalProvider = () => {
+interface ModalProviderProps {
+    products: ProductWithPrice[];
+}
+
+const ModalProvider: React.FC<ModalProviderProps> = ({
+    products
+}) => {
     const [isMounted, setIsMounted] = useState(false);
 
     // prevent hydration errors - we never want to render a modal if we're in server-side rendering. Don't render anything if !isMounted.
@@ -23,7 +30,7 @@ const ModalProvider = () => {
         <>
             <AuthModal />
             <UploadModal />
-            <SubscribeModal />
+            <SubscribeModal products={products} />
 
         </>
     );
