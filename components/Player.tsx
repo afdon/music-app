@@ -5,13 +5,7 @@ import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import usePlayer from "@/hooks/usePlayer";
 import PlayerContent from "./PlayerContent";
 
-// type PlayerProps = {};
-
-const Player
-// : React.FC<PlayerProps> 
-= ({
-
-}) => {
+const Player = () => {
     const player = usePlayer();
     const { song } = useGetSongById(player.activeId);
 
