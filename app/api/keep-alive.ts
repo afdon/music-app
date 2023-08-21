@@ -16,34 +16,34 @@ export default async function handler(
     const tableExists = await supabaseAdmin
       .from('information_schema.tables')
       .select('table_name')
-      .eq('table_name', 'Cron');
+      .eq('table_name', 'cron');
 
     if (tableExists.data?.length === 0) {
       // Create the 'Cron' table if it doesn't exist
       await supabaseAdmin
-        .from('Cron')
-        .upsert([{ id: 'initial', count: 1 }]); // Create an entry with count = 1
-      console.log('Created "Cron" table and inserted initial entry.');
+        .from('cron')
+        .upsert([{ count: 1 }]); // Create an entry with count = 1
+      console.log('Created "cron" table and inserted initial entry.');
     } else {
       // Retrieve the first entry from the 'Cron' table
       const existingEntry = await supabaseAdmin
-        .from('Cron')
+        .from('cron')
         .select()
         .limit(1);
-      
+
       if (existingEntry.data?.length === 0) {
         // Insert an entry with count = 1 if there's no existing entry
         await supabaseAdmin
-          .from('Cron')
-          .upsert([{ id: 'initial', count: 1 }]);
-        console.log('Inserted initial entry into "Cron" table.');
+          .from('cron')
+          .upsert([{ count: 1 }]);
+        console.log('Inserted initial entry into "cron" table.');
       } else {
         // Increment the count and log the value
-        const { id, count } = existingEntry.data![0];
+        const { count } = existingEntry.data![0];
         const updatedEntry = await supabaseAdmin
-          .from('Cron')
-          .upsert([{ id, count: count + 1 }]);
-        console.log('Incremented "Cron" table entry:', updatedEntry.data![0]);
+          .from('cron')
+          .upsert([{ count: count + 1 }]);
+        console.log('Incremented "cron" table entry:', updatedEntry.data![0]);
       }
     }
 

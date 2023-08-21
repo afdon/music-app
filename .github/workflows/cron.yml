@@ -1,7 +1,7 @@
 name: cron job
 on:
   schedule:
-    - cron: "00 7 * * *" # daily at 7:00 AM UTC
+    - cron: "05 7 * * *" # daily at 7:05 AM UTC
 jobs:
   cron:
     runs-on: ubuntu-latest

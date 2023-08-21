@@ -16,22 +16,14 @@ export interface Database {
           count: number | null
         }
         Insert: {
-          author?: string | null
           created_at?: string | null
           id?: number
-          image_path?: string | null
-          song_path?: string | null
-          title?: string | null
-          user_id?: string | null
+          count: number | null
         }
         Update: {
-          author?: string | null
           created_at?: string | null
           id?: number
-          image_path?: string | null
-          song_path?: string | null
-          title?: string | null
-          user_id?: string | null
+          count: number | null
         }
       }
       customers: {
