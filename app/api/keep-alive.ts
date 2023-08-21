@@ -1,11 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createClient } from '@supabase/supabase-js';
-import { postData, getURL } from '@/libs/helpers';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-);
+import { supabaseAdmin } from '@/libs/supabaseAdmin';
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,38 +13,41 @@ export default async function handler(
 
   try {
     // Check if the 'Cron' table exists in the database
-    const tableExists = await supabase
-      .rpc('table_exists', { table_name: 'Cron' })
-      .then(({ data }) => data?.table_exists || false);
+    const tableExists = await supabaseAdmin
+      .from('information_schema.tables')
+      .select('table_name')
+      .eq('table_name', 'Cron');
 
-    if (!tableExists) {
-      // Create the 'Cron' table
-      await supabase.rpc('create_table', {
-        table_name: 'Cron',
-        columns: [
-          { name: 'id', type: 'uuid', primary_key: true },
-          { name: 'created_at', type: 'timestamp', default: 'now()' },
-          { name: 'updated_at', type: 'timestamp', default: 'now()' },
-          { name: 'count', type: 'integer' },
-        ],
-      });
-
-      // Insert a new entry with an initial count of 1
-      const data = await postData({
-        url: `${getURL()}/api/keep-alive`,
-      });
-
-      res.status(200).json(data);
+    if (tableExists.data?.length === 0) {
+      // Create the 'Cron' table if it doesn't exist
+      await supabaseAdmin
+        .from('Cron')
+        .upsert([{ id: 'initial', count: 1 }]); // Create an entry with count = 1
+      console.log('Created "Cron" table and inserted initial entry.');
     } else {
-      // Increment the count of the first entry and log it
-      const data = await postData({
-        url: `${getURL()}/api/keep-alive`,
-      });
-
-      console.log('Updated count:', data?.count);
-
-      res.status(200).json(data);
+      // Retrieve the first entry from the 'Cron' table
+      const existingEntry = await supabaseAdmin
+        .from('Cron')
+        .select()
+        .limit(1);
+      
+      if (existingEntry.data?.length === 0) {
+        // Insert an entry with count = 1 if there's no existing entry
+        await supabaseAdmin
+          .from('Cron')
+          .upsert([{ id: 'initial', count: 1 }]);
+        console.log('Inserted initial entry into "Cron" table.');
+      } else {
+        // Increment the count and log the value
+        const { id, count } = existingEntry.data![0];
+        const updatedEntry = await supabaseAdmin
+          .from('Cron')
+          .upsert([{ id, count: count + 1 }]);
+        console.log('Incremented "Cron" table entry:', updatedEntry.data![0]);
+      }
     }
+
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'An error occurred.' });
