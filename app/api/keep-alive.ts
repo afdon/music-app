@@ -42,7 +42,7 @@ export default async function handler(
         const { count } = existingEntry.data![0];
         const updatedEntry = await supabaseAdmin
           .from('cron')
-          .upsert([{ count: count + 1 }]);
+          .upsert([{ count: (count ?? 0) + 1 }]);
         console.log('Incremented "cron" table entry:', updatedEntry.data![0]);
       }
     }
