@@ -1,7 +1,7 @@
-name: awesome cron job
+name: cron job
 on:
   schedule:
-    - cron: "00 6 * * *" # daily at 6:00 AM UTC
+    - cron: "10 6 * * *" # daily at 6:00 AM UTC
 jobs:
   cron:
     runs-on: ubuntu-latest
