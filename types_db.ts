@@ -9,6 +9,31 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      cron: {
+        Row: {
+          created_at: string | null
+          id: number
+          count: number | null
+        }
+        Insert: {
+          author?: string | null
+          created_at?: string | null
+          id?: number
+          image_path?: string | null
+          song_path?: string | null
+          title?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          author?: string | null
+          created_at?: string | null
+          id?: number
+          image_path?: string | null
+          song_path?: string | null
+          title?: string | null
+          user_id?: string | null
+        }
+      }
       customers: {
         Row: {
           id: string
